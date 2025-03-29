@@ -4,6 +4,7 @@ import br.ifsp.contacts.model.Contact;
 import br.ifsp.contacts.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -65,9 +66,8 @@ public class ContactController {
         contactRepository.deleteById(id);
     }
 
-    // Exemplo de URL: http://localhost:8080/api/contacts/search?name=Maria
     @GetMapping("/search")
-    public List<Contact> searchContactsByName(@RequestParam String name) {
+    public List<Contact> searchContactsByName(@Valid @RequestParam String name) {
         return contactRepository.findByNomeContainingIgnoreCase(name);
     }
 
